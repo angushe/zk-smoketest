@@ -266,7 +266,8 @@ def asynchronous_latency_test(s, data):
 
 def read_zk_config(filename):
     with open(filename) as f:
-        config = dict(tuple(line.rstrip().split('=', 1)) for line in f if line.rstrip())
+        config = dict(tuple(line.rstrip().split('=', 1))
+                      for line in f if line.rstrip() and not line.startswith('#'))
         return config
 
 def get_zk_servers(filename):
