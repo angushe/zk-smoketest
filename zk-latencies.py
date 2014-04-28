@@ -72,10 +72,12 @@ class SmokeError(Exception):
 def print_elap(start, msg, count):
     elapms = (time.time() - start) * 1000
     if int(elapms) != 0:
-        print("%s in %6d ms (%f ms/op %f/sec)"
-              % (msg, int(elapms), elapms/count, count/(elapms/1000.0)))
+        print("%s: %s in %6d ms (%f ms/op %f/sec)" % (
+            options.root_znode, msg, int(elapms), elapms / count,
+            count / (elapms / 1000.0)))
     else:
-        print("%s in %6d ms (included in prior)" % (msg, int(elapms)))
+        print("%s: %s in %6d ms (included in prior)" % (
+            options.root_znode, msg, int(elapms)))
 
 def timer(ops, msg, count=options.znode_count):
     start = time.time()
